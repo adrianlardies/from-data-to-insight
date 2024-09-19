@@ -74,8 +74,8 @@ These visualizations provide a clear and comprehensive view of the financial dat
 
 ## Data Sources and Links
 
-- **Presentation**: [Enlace Presentación](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
-- **Database Creation Script**: [create_database.sql]([scripts/create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/92bddb8ffd43b1e730ae05d2d77418ac1e8d7e43/scripts/create_database.sql))  
-- **Query History**: [query_history.sql]([scripts](https://github.com/adrianlardies/from-data-to-insight/tree/92bddb8ffd43b1e730ae05d2d77418ac1e8d7e43/scripts))  
+- **Presentation**: [Project Presentation](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
+- **Database Creation Script**: [create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/48a08e9707e174a4b6f33536632535a1861e2bc4/scripts/create_database.sql)  
+- **Query History**: [query_history.sql](https://github.com/adrianlardies/from-data-to-insight/tree/48a08e9707e174a4b6f33536632535a1861e2bc4/scripts)
 
 This README provides an overview of the project, detailing the methodology, analysis, and key findings. For more information, please refer to the provided resources.
