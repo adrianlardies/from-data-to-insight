@@ -17,7 +17,8 @@ The data used in this project originates from a previous project where we consol
 
 ### Challenges Addressed
 
-- **Data Integrity**: Ensuring the consistency and accuracy of data transferred from the CSV to the database. Our data comes from the previous project [Repository](https://github.com/adrianlardies/multi-asset-financial-analysis)
+- **Data Integrity**: Ensuring the consistency and accuracy of data transferred from the CSV to the database. Our data comes from the previous project [multi-asset-financial-analysis
+](https://github.com/adrianlardies/multi-asset-financial-analysis)
 - **Efficient Queries**: Optimizing SQL queries for speed and accuracy, especially with large datasets.
 
 ## Key Questions Addressed
