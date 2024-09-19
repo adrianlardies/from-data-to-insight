@@ -1,4 +1,4 @@
-# Database Project: Creation, Insertion, and Utilization
+# Financial Data Analysis Project: Database Creation, Insertion, and Utilization
 
 <p align="center">
 <img src="https://th.bing.com/th/id/OIG4.X0nn0DWcE_P2GtYBOhEE?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Database Image" width="50%">
@@ -6,67 +6,76 @@
 
 ## Introduction
 
-This project aims to create, insert, and utilize a database to efficiently manage information. Through this project, we will learn how to design a database, insert data, and perform queries to retrieve relevant information.
+This project aims to design, create, and utilize a database to efficiently manage financial data, including information on Bitcoin, Gold, and the S&P 500. The goal is to analyze how these assets behave in relation to various economic factors such as inflation, interest rates, and market volatility (VIX). Through this project, we demonstrate the process of database design, data insertion, advanced querying, and data visualization.
 
 ## Data Sources
 
-We will use the following data sources for our project:
+The data used in this project originates from a previous project where we consolidated financial data from multiple sources, resulting in the df_combined.csv file. This file includes:
 
-- **Product data**: Information on available assets, prices included and economic factors.
+- **Assets Data**: Historical prices of Bitcoin, Gold, and the S&P 500.
+- **Economic Factors**:  Information on market volatility (VIX), interest rates, CPI, and inflation.
 
-### Challenges
+### Challenges Addressed
 
 - **Data Integrity**: Our data comes from the previous project [Repository](https://github.com/adrianlardies/multi-asset-financial-analysis) ,  df_combined.CSV  [CSV](https://github.com/adrianlardies/from-data-to-insight/blob/main/df_combined.csv)
-- **Efficient Queries**: Optimizing queries to retrieve information quickly and accurately.
+- **Efficient Queries**: Optimizing SQL queries for speed and accuracy, especially with large datasets.
 
-## Key Questions
+## Key Questions Addressed
 
-1. **How ​​to design an efficient database to manage dates, assets and important metrics for the stock market?**
-   - **Conclusion**: Use a relational model with well-defined tables and clear relationships between them.  
-**[Entity Relationship Diagram](https://enlace)**  
+1. **How to design an efficient database to manage dates, assets, and key economic metrics?**
+   - **Solution**: Implement a relational database model with well-defined tables and relationships, leveraging foreign keys to maintain data integrity.
 
 2. **How to insert data securely and efficiently into the database?**
-   - **Conclusion**: Use transactions and stored procedures to ensure data integrity.
+   - **Solution**: Use Python scripts to automate the data insertion process, ensuring that data is inserted securely and efficiently, with integrity constraints enforced.
 
 3. **How to perform queries to retrieve relevant information from the database?**
-   - **Conclusion**: Use indexes and query optimizations to improve performance.
+   - **Solution**: Utilize SQL features like JOIN, GROUP BY, ORDER BY, CASE, and subqueries to extract and analyze the data. Use indexes to optimize query performance.
 
 ## Methodology
 
 ### 1. Problem Definition and Hypothesis Formulation
-We defined the problem of efficiently managing information and formulated hypotheses on how to design and use the database to solve this problem.
+The project began with defining the problem: efficiently managing and analyzing financial data. Hypotheses were formulated on how to design the database structure to facilitate this analysis, focusing on optimizing the database for financial queries.
 
 ### 2. Database Creation
-We design the database structure using a relational model, more information about the database structure. In the files included in this project 'create_database.sql' and entity relationship diagram.
+The database was designed using a relational model with three main tables:
+- `dates`: Stores unique dates and their corresponding `id_date`.
+- `assets`: Contains data on the prices and changes of Bitcoin, Gold, and the S&P 500, linked to `id_date`.
+- `economic_factors`: Stores economic indicators such as VIX, interest rates, CPI, and inflation, also linked to `id_date`.
 
+The SQL scripts for creating these tables are included in the `create_database.sql` file.
 
 ### 3. Data Insertion
-We insert data into tables using Python scripts. We ensure data integrity through the use of transactions and stored procedures.
+Data from df_combined.csv was inserted into the database using Python and SQLAlchemy. The insertion process was handled with care to maintain data integrity, utilizing foreign keys and ensuring correct relationships between tables.
 
 ### 4. Analysis and Queries
-We performed queries to retrieve relevant information from the database. We used indexes and query optimizations to improve performance.
+Five advanced SQL queries were developed to analyze the data:
+1. **Annual Growth Analysis**: Calculated the yearly growth rates of Bitcoin, Gold, and the S&P 500.
+2. **Monthly Average and Volatility**: Analyzed the monthly average prices and volatility of the assets.
+3. **Impact of Interest Rates on Bitcoin**: Investigated how low and high interest rates affect Bitcoin's price and volatility.
+4. **S&P 500 Growth and Inflation**: Explored the relationship between the growth of the S&P 500 and inflation rates.
+5. **Bitcoin Performance under High Volatility and Inflation**: Analyzed Bitcoin's average performance and volatility during periods of high market volatility (VIX > 30) and inflation (inflation > 3%).
 
 ### 5. Visualization
-We created visualizations to represent the information retrieved from the database. We used charts and tables to display the data clearly and comprehensibly.
+Two detailed visualizations were created to illustrate the results of the SQL queries:
+- **Annual Growth Visualization**: A line graph showing the annual growth of Bitcoin, Gold, and the S&P 500.
+- **S&P 500 Growth vs. Inflation**: A dual-axis line chart comparing the S&P 500’s growth rate with the average inflation rate over the years.
+
+These visualizations provide a clear and comprehensive view of the financial data, helping to understand the trends and relationships between the variables.
 
 ## Key Findings and Conclusions
+- **Efficient Database Design**: A well-structured relational database is crucial for managing and analyzing financial data effectively.
+- **Secure and Efficient Data Insertion**: Using Python and SQLAlchemy for data insertion ensures data integrity and efficiency.
+- **Powerful Querying Capabilities**: Advanced SQL queries, when properly optimized, can yield deep insights into financial data.
+- **Visualization for Insight**: Visualizing the results of queries is essential for interpreting and communicating the data's story.
 
-1. **Efficient Database Design**: A well-designed relational model allows for efficient and secure information management.
-2. **Secure Data Insertion**: Using transactions and stored procedures ensures data integrity.
-3. **Optimized Queries**: Query optimization and the use of indexes significantly improve database performance.
-
-## Future Questions
-
-- How can we improve the scalability of the database to handle large volumes of data?
-- What additional security techniques can we implement to protect sensitive information?
+## Future Directions
+- **Scalability**: Investigate ways to scale the database to handle even larger datasets, ensuring continued performance efficiency.
+- **Enhanced Security**: Explore additional security measures to protect sensitive financial data, such as encryption and advanced access controls.
 
 ## Data Sources and Links
 
-- **URL presentation**: [Enlace Presentación](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
-- **Create Database**: [create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/main/create_database.sql)  
-- **Query History**: [query_history.sql](https://github.com/adrianlardies/from-data-to-insight/blob/main/hist_querys.sql)  
+- **Presentation**: [Enlace Presentación](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
+- **Database Creation Script**: [create_database.sql]([scripts/create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/92bddb8ffd43b1e730ae05d2d77418ac1e8d7e43/scripts/create_database.sql))  
+- **Query History**: [query_history.sql]([scripts](https://github.com/adrianlardies/from-data-to-insight/tree/92bddb8ffd43b1e730ae05d2d77418ac1e8d7e43/scripts))  
 
-
----
- 
-This README provides an overview of the key steps taken during the project, offering insight into our analysis and decision-making process, as well as possible future directions for improvement.
+This README provides an overview of the project, detailing the methodology, analysis, and key findings. For more information, please refer to the provided resources.
