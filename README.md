@@ -12,17 +12,18 @@ This project aims to create, insert, and utilize a database to efficiently manag
 
 We will use the following data sources for our project:
 
-- **Product data**: Information on available assets, prices included, economic factors and assets.
+- **Product data**: Information on available assets, prices included and economic factors.
 
 ### Challenges
 
-- **Data Integrity**: Ensuring that the inserted data is consistent and valid.
+- **Data Integrity**: Our data comes from the previous project [Repository](https://github.com/adrianlardies/multi-asset-financial-analysis) ,  df_combined.CSV  [CSV](https://github.com/adrianlardies/from-data-to-insight/blob/main/df_combined.csv)
 - **Efficient Queries**: Optimizing queries to retrieve information quickly and accurately.
 
 ## Key Questions
 
 1. **How ​​to design an efficient database to manage dates, assets and important metrics for the stock market?**
-   - **Conclusion**: Use a relational model with well-defined tables and clear relationships between them.
+   - **Conclusion**: Use a relational model with well-defined tables and clear relationships between them.  
+**[Entity Relationship Diagram](https://enlace)**  
 
 2. **How to insert data securely and efficiently into the database?**
    - **Conclusion**: Use transactions and stored procedures to ensure data integrity.
@@ -61,10 +62,11 @@ We created visualizations to represent the information retrieved from the databa
 
 ## Data Sources and Links
 
-- **SQL Documentation**: SQL Documentation
-- **Database Tutorials**: Database Tutorials
-- **Visualization Tools**: Matplotlib
+- **URL presentation**: [Enlace Presentación](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
+- **[create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/main/create_database.sql)**  
+- **[query_history.sql]()**  
+
 
 ---
-
+ 
 This README provides an overview of the key steps taken during the project, offering insight into our analysis and decision-making process, as well as possible future directions for improvement.
