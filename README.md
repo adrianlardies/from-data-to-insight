@@ -63,8 +63,8 @@ We created visualizations to represent the information retrieved from the databa
 ## Data Sources and Links
 
 - **URL presentation**: [Enlace Presentación](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
-- **[create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/main/create_database.sql)**  
-- **[query_history.sql]()**  
+- **Create Database**: [create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/main/create_database.sql)  
+- **Query History**: [query_history.sql](https://github.com/adrianlardies/from-data-to-insight/blob/main/hist_querys.sql)  
 
 
 ---
