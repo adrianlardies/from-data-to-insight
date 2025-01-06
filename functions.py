@@ -23,14 +23,11 @@ def insert_dates(df, engine):
 def merge_dates(df, engine):
     # Leer las fechas desde la base de datos
     dates_from_db = pd.read_sql('SELECT * FROM dates', con=engine)
-    
     # Asegurarse de que las fechas estén en el mismo formato
     df['date'] = pd.to_datetime(df['date']).dt.date
     dates_from_db['date'] = pd.to_datetime(dates_from_db['date']).dt.date
-    
     # Realizar el merge entre el DataFrame original y las fechas desde la base de datos
     df_merged = pd.merge(df, dates_from_db, how='left', on='date')
-    
     # Verificar si las columnas 'id_date_x' y 'id_date_y' existen
     if 'id_date_x' in df_merged.columns and 'id_date_y' in df_merged.columns:
         df_merged.drop(columns=['id_date_x'], inplace=True)
