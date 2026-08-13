@@ -1,6 +1,6 @@
 SELECT
     AVG(a.price_bitcoin) AS avg_bitcoin_price,
-    STD(a.price_bitcoin) AS volatility_bitcoin,
+    STD(a.price_bitcoin) AS bitcoin_price_stddev,
     AVG(e.vix) AS avg_vix,
     AVG(e.inflation) AS avg_inflation
 FROM

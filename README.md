@@ -1,82 +1,182 @@
-# Financial Data Analysis Project: Database Creation, Insertion, and Utilization
+# Financial Data Management with Python & MySQL
 
-<p align="center">
-<img src="https://th.bing.com/th/id/OIG4.X0nn0DWcE_P2GtYBOhEE?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Database Image" width="50%">
-</p>
+This project demonstrates how to structure a financial dataset as a relational model, load it into MySQL with Python, pandas, and SQLAlchemy, and query the stored data with SQL. The dataset contains daily asset prices and economic indicators organized around a shared date dimension.
 
-## Introduction
+The main focus is relational data modeling, data ingestion, SQL, and Python/MySQL integration. The included notebook and SQL queries use the resulting database for a small set of financial analyses, but analysis is a downstream use of the data model rather than the project's primary identity.
 
-This project aims to design, create, and utilize a database to efficiently manage financial data, including information on Bitcoin, Gold, and the S&P 500. The goal is to analyze how these assets behave in relation to various economic factors such as inflation, interest rates, and market volatility (VIX). Through this project, we demonstrate the process of database design, data insertion, advanced querying, and data visualization.
+## Data Flow
 
-## Data Sources
+```text
+CSV dataset
+    ↓
+Python / pandas
+    ↓
+SQLAlchemy / PyMySQL
+    ↓
+MySQL
+    ↓
+dates ─┬─ assets
+       └─ economic_factors
+    ↓
+SQL queries
+    ↓
+Notebook analysis and visualization
+```
 
-The data used in this project originates from a previous project where we consolidated financial data from multiple sources, resulting in the df_combined.csv file. This file includes:
+## Data Model
 
-- **Assets Data**: Historical prices of Bitcoin, Gold, and the S&P 500.
-- **Economic Factors**:  Information on market volatility (VIX), interest rates, CPI, and inflation.
+### `dates`
 
-### Challenges Addressed
+Date dimension containing one row per dataset date:
 
-- **Data Integrity**: Ensuring the consistency and accuracy of data transferred from the CSV to the database. Our data comes from the previous project [multi-asset-financial-analysis
-](https://github.com/adrianlardies/multi-asset-financial-analysis)
-- **Efficient Queries**: Optimizing SQL queries for speed and accuracy, especially with large datasets.
+- `id_date`: auto-incrementing integer primary key.
+- `date`: the actual calendar date.
 
-## Key Questions Addressed
+### `assets`
 
-1. **How to design an efficient database to manage dates, assets, and key economic metrics?**
-   - **Solution**: Implement a relational database model with well-defined tables and relationships, leveraging foreign keys to maintain data integrity.
+Asset observations keyed by `id_date`:
 
-2. **How to insert data securely and efficiently into the database?**
-   - **Solution**: Use Python scripts to automate the data insertion process, ensuring that data is inserted securely and efficiently, with integrity constraints enforced.
+- `id_date`: primary key and foreign key to `dates.id_date`.
+- `price_bitcoin`: Bitcoin price level.
+- `price_gold`: gold price level.
+- `price_sp500`: S&P 500 price level.
+- `change_bitcoin`: Bitcoin change value provided by the source dataset.
+- `change_gold`: gold change value provided by the source dataset.
 
-3. **How to perform queries to retrieve relevant information from the database?**
-   - **Solution**: Utilize SQL features like JOIN, GROUP BY, ORDER BY, CASE, and subqueries to extract and analyze the data. Use indexes to optimize query performance.
+### `economic_factors`
 
-## Methodology
+Economic observations keyed by `id_date`:
 
-### 1. Problem Definition and Hypothesis Formulation
-The project began with defining the problem: efficiently managing and analyzing financial data. Hypotheses were formulated on how to design the database structure to facilitate this analysis, focusing on optimizing the database for financial queries.
+- `id_date`: primary key and foreign key to `dates.id_date`.
+- `vix`: VIX market volatility indicator.
+- `interest_rate`: interest-rate value.
+- `cpi`: Consumer Price Index value.
+- `inflation`: inflation value.
 
-### 2. Database Creation
-The database was designed using a relational model with three main tables:
-- `dates`: Stores unique dates and their corresponding `id_date`.
-- `assets`: Contains data on the prices and changes of Bitcoin, Gold, and the S&P 500, linked to `id_date`.
-- `economic_factors`: Stores economic indicators such as VIX, interest rates, CPI, and inflation, also linked to `id_date`.
+Both `assets` and `economic_factors` relate to `dates` through `id_date`. This separates asset observations from economic indicators while retaining a common date key for joins.
 
-The SQL scripts for creating these tables are included in the `create_database.sql` file.
+![Current relational database schema](images/ERD_Workbench.png)
 
-### 3. Data Insertion
-Data from df_combined.csv was inserted into the database using Python and SQLAlchemy. The insertion process was handled with care to maintain data integrity, utilizing foreign keys and ensuring correct relationships between tables.
+## Tech Stack
 
-### 4. Analysis and Queries
-Five advanced SQL queries were developed to analyze the data:
-1. **Annual Growth Analysis**: Calculated the yearly growth rates of Bitcoin, Gold, and the S&P 500.
-2. **Monthly Average and Volatility**: Analyzed the monthly average prices and volatility of the assets.
-3. **Impact of Interest Rates on Bitcoin**: Investigated how low and high interest rates affect Bitcoin's price and volatility.
-4. **S&P 500 Growth and Inflation**: Explored the relationship between the growth of the S&P 500 and inflation rates.
-5. **Bitcoin Performance under High Volatility and Inflation**: Analyzed Bitcoin's average performance and volatility during periods of high market volatility (VIX > 30) and inflation (inflation > 3%).
+- Python
+- pandas
+- SQLAlchemy
+- MySQL
+- PyMySQL
+- SQL
+- Jupyter
+- matplotlib
 
-### 5. Visualization
-Two detailed visualizations were created to illustrate the results of the SQL queries:
-- **Annual Growth Visualization**: A line graph showing the annual growth of Bitcoin, Gold, and the S&P 500.
-- **S&P 500 Growth vs. Inflation**: A dual-axis line chart comparing the S&P 500’s growth rate with the average inflation rate over the years.
+## Repository Structure
 
-These visualizations provide a clear and comprehensive view of the financial data, helping to understand the trends and relationships between the variables.
+```text
+.
+├── README.md
+├── requirements.txt
+├── .env.example
+├── data/
+│   └── df_combined.csv
+├── images/
+│   ├── ERD_Workbench.png
+│   └── ERD.jpg
+├── notebooks/
+│   └── analysis.ipynb
+├── sql/
+│   ├── create_database.sql
+│   ├── 01_annual_asset_growth.sql
+│   ├── 02_monthly_asset_statistics.sql
+│   ├── 03_bitcoin_interest_rates.sql
+│   ├── 04_sp500_inflation.sql
+│   └── 05_bitcoin_high_volatility.sql
+└── src/
+    ├── __init__.py
+    ├── data_pipeline.py
+    └── visualization.py
+```
 
-## Key Findings and Conclusions
-- **Efficient Database Design**: A well-structured relational database is crucial for managing and analyzing financial data effectively.
-- **Secure and Efficient Data Insertion**: Using Python and SQLAlchemy for data insertion ensures data integrity and efficiency.
-- **Powerful Querying Capabilities**: Advanced SQL queries, when properly optimized, can yield deep insights into financial data.
-- **Visualization for Insight**: Visualizing the results of queries is essential for interpreting and communicating the data's story.
+## Setup
 
-## Future Directions
-- **Scalability**: Investigate ways to scale the database to handle even larger datasets, ensuring continued performance efficiency.
-- **Enhanced Security**: Explore additional security measures to protect sensitive financial data, such as encryption and advanced access controls.
+### 1. Clone the repository
 
-## Data Sources and Links
+```bash
+git clone https://github.com/adrianlardies/from-data-to-insight.git
+cd from-data-to-insight
+```
 
-- **Presentation**: [Project Presentation](https://gamma.app/docs/Analisis-de-Activos-Financieros-con-SQL-dar1neyyi37mk7f?mode=present#card-08caant46xa6859)
-- **Database Creation Script**: [create_database.sql](https://github.com/adrianlardies/from-data-to-insight/blob/48a08e9707e174a4b6f33536632535a1861e2bc4/scripts/create_database.sql)  
-- **Query History**: [query_history.sql](https://github.com/adrianlardies/from-data-to-insight/tree/48a08e9707e174a4b6f33536632535a1861e2bc4/scripts)
+### 2. Create a Python environment
 
-This README provides an overview of the project, detailing the methodology, analysis, and key findings. For more information, please refer to the provided resources.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 3. Configure MySQL credentials
+
+The connection helper in `src/data_pipeline.py` reads the following process environment variables:
+
+- `MYSQL_USER`: MySQL user; defaults to `root` if unset.
+- `MYSQL_PASSWORD`: MySQL password.
+- `MYSQL_HOST`: MySQL host; defaults to `localhost` if unset.
+- `MYSQL_PORT`: MySQL port; defaults to `3306` if unset.
+- `MYSQL_DATABASE`: database name; defaults to `financial_analysis` if unset.
+
+See [`.env.example`](.env.example) for the expected names and example values. The project does not use `python-dotenv`, so a `.env` file is not loaded automatically. Export the values into the environment from which Jupyter runs, for example:
+
+```bash
+export MYSQL_USER=root
+export MYSQL_PASSWORD='your_password'
+export MYSQL_HOST=localhost
+export MYSQL_PORT=3306
+export MYSQL_DATABASE=financial_analysis
+```
+
+Alternatively, if `MYSQL_PASSWORD` is not set, `notebooks/analysis.ipynb` requests the password interactively with `getpass`. The other connection values continue to come from environment variables or the defaults listed above.
+
+### 4. Create the database
+
+[`sql/create_database.sql`](sql/create_database.sql) creates the `financial_analysis` database and its `dates`, `assets`, and `economic_factors` tables, including their primary- and foreign-key relationships. Run it with a MySQL account that can create databases, for example:
+
+```bash
+mysql -u root -p < sql/create_database.sql
+```
+
+The loading workflow is designed for a new, clean database. Re-running the loader against populated tables attempts to append the same records and can violate key constraints or duplicate date rows.
+
+## Running the Project
+
+1. Start a local MySQL server and create the database and tables with `sql/create_database.sql`.
+2. Make the required MySQL credentials available to the Jupyter process, or provide the password when the notebook prompts for it.
+3. Open `notebooks/analysis.ipynb` from the repository root with Jupyter.
+4. Run the notebook's ingestion cells in order. They read `data/df_combined.csv`, insert unique dates, map records to `id_date`, and append rows to `assets` and `economic_factors`.
+5. Use the query files in `sql/` against the populated database. The notebook contains the corresponding analysis flow and visualizes the annual asset growth and S&P 500/inflation results.
+
+No standalone command-line entrypoint is provided; the ingestion workflow is executed through the notebook.
+
+## SQL Analysis
+
+- [`01_annual_asset_growth.sql`](sql/01_annual_asset_growth.sql): selects each year's final available asset prices and calculates year-over-year percentage growth for Bitcoin, gold, and the S&P 500.
+- [`02_monthly_asset_statistics.sql`](sql/02_monthly_asset_statistics.sql): calculates monthly average prices and price standard deviation for Bitcoin, gold, and the S&P 500.
+- [`03_bitcoin_interest_rates.sql`](sql/03_bitcoin_interest_rates.sql): groups observations into interest-rate scenarios at or below 2% versus above 2%, then calculates Bitcoin's average price and price dispersion in each group.
+- [`04_sp500_inflation.sql`](sql/04_sp500_inflation.sql): combines year-end S&P 500 growth with the average inflation value for each year.
+- [`05_bitcoin_high_volatility.sql`](sql/05_bitcoin_high_volatility.sql): for rows where VIX is above 30 and inflation is above 3%, calculates Bitcoin's average price and price standard deviation together with average VIX and inflation.
+
+Here, SQL `STD()` is applied to absolute price levels. These results describe price standard deviation or price dispersion, not return volatility. VIX is separately treated as a market volatility indicator.
+
+## Design Decisions
+
+- A separate `dates` dimension provides a shared key for all observations.
+- Asset data and economic indicators are stored in separate relational tables connected by foreign keys.
+- Python, pandas, and SQLAlchemy handle CSV ingestion and table loading into MySQL.
+- SQL analysis files remain separate from the Python visualization helpers.
+
+## Limitations
+
+This is a portfolio demonstration built around a small included dataset of 2,293 rows and local MySQL execution. The loader assumes a new or clean database and uses append operations, so ingestion is not idempotent. The project does not implement distributed processing or a production-scale architecture. The SQL was statically reviewed during the current documentation modernization, but the workflow was not validated against a live MySQL instance. Analytically, several statistics measure dispersion in absolute price levels rather than volatility calculated from returns.
+
+## Possible Extensions
+
+- Add transactional, idempotent ingestion with explicit duplicate handling.
+- Add automated tests for transformations, schema expectations, and SQL outputs.
+- Provide a containerized local environment for reproducible MySQL and Jupyter setup.
